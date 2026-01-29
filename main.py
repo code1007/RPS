@@ -165,7 +165,6 @@ def one_fold(args,k,ckc_metric,train_p, train_l, test_p, test_l,val_p,val_l):
     else:
         _teacher_init =args.teacher_init
 
-    # --->bulid networks
     if args.model == 'rps':
         if args.mrh_sche:
             mrh_sche = cosine_scheduler(args.mask_ratio_h,0.,epochs=args.num_epoch,niter_per_ep=len(train_loader))
