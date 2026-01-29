@@ -158,16 +158,8 @@ class TransMIL(nn.Module):
 
 if __name__ == "__main__":
     data = torch.randn((1, 6000, 1024))
-    
     model = TransMIL(n_classes=10, dropout=False, act='relu', output_patch_scores=True)
     
     outputs = model(data)
     
-    print("Bag logits shape:", outputs['bag_logits'].shape)
-    print("Patch logits shape:", outputs['patch_logits'].shape)
-    print("Patch scores shape:", outputs['patch_scores'].shape)
-    print("Patch scores matrix shape:", outputs['patch_scores_matrix'].shape)
-    
     row_sums = outputs['patch_scores_matrix'].sum(dim=1)
-    print("Row sums (should be all 1.0):", row_sums[:5])
-    print("All rows sum to 1:", torch.allclose(row_sums, torch.ones_like(row_sums), rtol=1e-5))
